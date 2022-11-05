@@ -1,0 +1,40 @@
+{
+  "name": "K-Means",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shoppinh/nodejs-blog.git"
+  },
+  "keywords": [
+    "nodejs",
+    "blog"
+  ],
+  "author": "kienneik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shoppinh/nodejs-blog/issues"
+  },
+  "homepage": "https://github.com/shoppinh/nodejs-blog#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "body-parser": "latest",
+    "express": "latest",
+    "express-handlebars": "^5.3.3",
+    "express-promise-router": "^3.0.3",
+    "mongoose": "^6.7.1",
+    "morgan": "^1.10.0",
+    "node-kmeans": "^1.1.9",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12"
+  }
+}
