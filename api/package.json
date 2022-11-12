@@ -25,6 +25,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "body-parser": "latest",
+    "cors": "^2.8.5",
     "express": "latest",
     "express-handlebars": "^5.3.3",
     "express-promise-router": "^3.0.3",

@@ -16,36 +16,35 @@ const groupOrders = (req, res) => {
   });
 };
 const assignDrivers = (req, res) => {
-  const { data, drivers } = req.value.body;
+  const { orders, drivers } = req.value.body;
 
-  if (data.length == 0 || drivers.length == 0)
+  if (orders.length == 0 || drivers.length == 0)
     return res.status(400).json({ message: "Error" });
   else {
     let vectors = new Array();
-    for (let i = 0; i < data.length; i++) {
-      vectors[i] = [data[i]["longitude_to"], data[i]["latitude_to"]];
+    for (let i = 0; i < orders.length; i++) {
+      vectors[i] = [orders[i]["longitudeTo"], orders[i]["latitudeTo"]];
     }
     kmeans.clusterize(vectors, { k: drivers.length }, (err, result) => {
       if (err) {
         return res.status(400).json({ message: "Error" });
       } else {
-        const i = 0;
-        const t = 0;
-        const driversAssigned = [];
-        const ordersAssigned = [];
-        for (i = 0; i < result.length; i++) {
+        let driversAssigned = [];
+        let ordersAssigned = [];
+        for (let i = 0 ; i < result.length; i++) {
           ordersAssigned = [];
-          for (t = 0; t < result[i].clusterInd.length; t++) {
+          for (let t = 0; t < result[i].clusterInd.length; t++) {
             ordersAssigned.push({
-              order_id: data[result[i].clusterInd[t]].order_id,
-              recipient_name: data[result[i].clusterInd[t]].recipient_name,
-              recipient_full_address:
-                data[result[i].clusterInd[t]].recipient_full_address,
+              orderId: orders[result[i].clusterInd[t]].orderId,
+              // recipient_name: orders[result[i].clusterInd[t]].recipient_name,
+              // recipient_full_address:
+              //   orders[result[i].clusterInd[t]].recipient_full_address,
             });
           }
           driversAssigned.push({
-            driver_id: drivers[i].driver_id,
+            driverId: drivers[i].driverId,
             name: drivers[i].name,
+            phoneNumber: drivers[i].phoneNumber,
             ordersAssigned: ordersAssigned,
           });
         }

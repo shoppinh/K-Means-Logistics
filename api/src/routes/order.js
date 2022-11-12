@@ -1,11 +1,11 @@
 const express = require("express");
 const router = require("express-promise-router")();
 const orderController = require("../app/controllers/OrderController");
-const { validateBody, validateParam, schemas } = require("../helpers");
+const { validateBody, validateParam,validateQuery, schemas } = require("../helpers");
 
 router
   .route("/")
-  .get(orderController.getAll)
+  .get(validateQuery(schemas.driverQuerySchema),orderController.getAll)
   .post(validateBody(schemas.orderSchema), orderController.createOrder);
 
 router

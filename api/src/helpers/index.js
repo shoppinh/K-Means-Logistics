@@ -16,6 +16,22 @@ const validateBody = (schema) => {
   };
 };
 
+const validateQuery = (schema) => {
+  return (req, res, next) => {
+    console.log("🚀 ~ file: index.js ~ line 22 ~ return ~ req.query", req.query)
+    const validatorResult = schema.validate(req.query);
+    if (validatorResult.error) {
+      return res.status(400).json(validatorResult.error);
+    } else {
+      if (!req.value) req.value = {};
+      if (!req.value["params"]) req.value.params = {};
+
+      req.value.query = validatorResult.value;
+      next();
+    }
+  }
+}
+
 const validateParam = (schema, name) => {
   return (req, res, next) => {
     const validatorResult = schema.validate({ param: req.params[name] });
@@ -68,14 +84,18 @@ const schemas = {
       .regex(/^[0-9a-fA-F]{24}$/)
       .required(),
   }),
+  driverQuerySchema: Joi.object().keys({
+    skip: Joi.number(),
+    limit: Joi.number(),
+  }),
   assignDriversSchema: Joi.object().keys({
     orders: Joi.array().items(Joi.object().keys({
       orderId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
       orderDate: Joi.date().required(),
-      senderName: Joi.string().required(),
-      senderFullAddress: Joi.string().required(),
-      recipientName: Joi.string().required(),
-      recipientFullAddress: Joi.string().required(),
+      senderName: Joi.string(),
+      senderFullAddress: Joi.string(),
+      recipientName: Joi.string(),
+      recipientFullAddress: Joi.string(),
       latitudeFrom: Joi.number().required(),
       longitudeFrom: Joi.number().required(),
       latitudeTo: Joi.number().required(),
@@ -83,7 +103,8 @@ const schemas = {
     })),
     drivers: Joi.array().items(Joi.object().keys({
       driverId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
-      driverName: Joi.string().required(),
+      name: Joi.string().required(),
+      phoneNumber: Joi.string().min(10).required(),
     })),
   }),
 };
@@ -91,5 +112,6 @@ const schemas = {
 module.exports = {
   validateBody,
   validateParam,
+  validateQuery,
   schemas,
 };

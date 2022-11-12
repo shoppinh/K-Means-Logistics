@@ -5,7 +5,7 @@ const {
   validateBody,
   schemas,
 } = require("../helpers");
-router.route("/assignDrivers").post(validateBody(schemas.assignDriversSchema), kMeanController.assignDrivers);
+router.route("/assign-drivers").post(validateBody(schemas.assignDriversSchema), kMeanController.assignDrivers);
 router.route("/groupOrders").post(kMeanController.groupOrders);
 
 module.exports = router;
