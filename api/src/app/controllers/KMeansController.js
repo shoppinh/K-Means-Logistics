@@ -17,6 +17,7 @@ const groupOrders = (req, res) => {
 };
 const assignDrivers = (req, res) => {
   const { orders, drivers } = req.value.body;
+  console.log("🚀 ~ file: KMeansController.js ~ line 20 ~ assignDrivers ~ orders", orders)
 
   if (orders.length == 0 || drivers.length == 0)
     return res.status(400).json({ message: "Error" });
@@ -36,7 +37,7 @@ const assignDrivers = (req, res) => {
           for (let t = 0; t < result[i].clusterInd.length; t++) {
             ordersAssigned.push({
               orderId: orders[result[i].clusterInd[t]].orderId,
-              // recipient_name: orders[result[i].clusterInd[t]].recipient_name,
+              recipientName: orders[result[i].clusterInd[t]].recipientName,
               // recipient_full_address:
               //   orders[result[i].clusterInd[t]].recipient_full_address,
             });

@@ -84,9 +84,10 @@ const schemas = {
       .regex(/^[0-9a-fA-F]{24}$/)
       .required(),
   }),
-  driverQuerySchema: Joi.object().keys({
+  paginationQuerySchema: Joi.object().keys({
     skip: Joi.number(),
     limit: Joi.number(),
+    text: Joi.string(),
   }),
   assignDriversSchema: Joi.object().keys({
     orders: Joi.array().items(Joi.object().keys({

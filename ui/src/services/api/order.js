@@ -2,8 +2,9 @@ import { api } from "../base";
 const PREFIX = "order";
 
 const orderApi = {
-  getOrders: () => {
-    return api.get(PREFIX);
+  getOrders: (query) => {
+    return api.get(PREFIX,{ params: query });
   },
+ 
 };
 export default orderApi;

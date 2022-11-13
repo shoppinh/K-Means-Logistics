@@ -1,9 +1,12 @@
 const Order = require("../models/Order");
 
 const getAll = async (req, res, next) => {
-  const { skip = 0, limit = 16} = req.value.query
+  const { skip = 0, limit = 16, text=""} = req.value.query
   try {
-    const orders = await Order.find().skip(skip).limit(limit);
+    const orders = await Order.find({recipientName: {
+      $regex: text,
+      $options: 'i'
+    }}).skip(skip).limit(limit);
     const totalItems = await Order.countDocuments();
     return res.status(200).json({
       orders: orders,

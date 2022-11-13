@@ -5,7 +5,7 @@ const { validateBody, validateParam,validateQuery, schemas } = require("../helpe
 
 router
   .route("/")
-  .get(validateQuery(schemas.driverQuerySchema),orderController.getAll)
+  .get(validateQuery(schemas.paginationQuerySchema),orderController.getAll)
   .post(validateBody(schemas.orderSchema), orderController.createOrder);
 
 router

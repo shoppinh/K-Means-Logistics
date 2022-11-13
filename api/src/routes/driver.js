@@ -4,12 +4,13 @@ const driverController = require("../app/controllers/DriverController");
 const {
   validateBody,
   validateParam,
+  validateQuery,
   schemas,
 } = require("../helpers");
 
 router
   .route("/")
-  .get(driverController.getAll)
+  .get(validateQuery(schemas.paginationQuerySchema),driverController.getAll)
   .post(validateBody(schemas.driverSchema), driverController.createDriver);
 
 router

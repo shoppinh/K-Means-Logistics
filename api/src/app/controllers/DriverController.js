@@ -1,9 +1,17 @@
 const Driver = require("../models/Driver");
 
 const getAll = async (req, res, next) => {
+  const {skip = 0, limit = 16, text=""} = req.value.query
   try {
-    const drivers = await Driver.find({});
-    return res.status(200).json(drivers);
+    const drivers = await Driver.find({name: {
+      $regex: text,
+      $options: 'i'
+    }}).skip(skip).limit(limit);
+    const totalItems = await Driver.countDocuments();
+    return res.status(200).json({
+      drivers,
+      totalItems,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
