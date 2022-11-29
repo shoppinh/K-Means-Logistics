@@ -21,10 +21,6 @@ export default function KMeans() {
 
     kmeansresult: [],
   });
-  console.log(
-    "🚀 ~ file: index.jsx ~ line 25 ~ KMeans ~ commonState",
-    commonState
-  );
 
   const driverChange = useCallback((selected) => {
     const selectedValue = selected[0];
