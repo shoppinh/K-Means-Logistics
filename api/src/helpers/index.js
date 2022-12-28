@@ -18,7 +18,6 @@ const validateBody = (schema) => {
 
 const validateQuery = (schema) => {
   return (req, res, next) => {
-    console.log("🚀 ~ file: index.js ~ line 22 ~ return ~ req.query", req.query)
     const validatorResult = schema.validate(req.query);
     if (validatorResult.error) {
       return res.status(400).json(validatorResult.error);

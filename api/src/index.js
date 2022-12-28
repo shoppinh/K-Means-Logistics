@@ -5,6 +5,7 @@ const app = express();
 const port = 8080;
 const route = require("./routes");
 const db = require("./config/db");
+require('dotenv').config()
 
 
 app.use(function(req, res, next) {
