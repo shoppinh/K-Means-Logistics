@@ -23,7 +23,6 @@ const Driver = () => {
       reset();
       alert("Create driver successfully");
     }catch(err) {
-      console.log("🚀 ~ file: Driver.jsx ~ line 23 ~ onSubmit ~ err", err)
       alert("Create driver failed");
     }
   }

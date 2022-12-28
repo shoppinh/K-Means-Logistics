@@ -20,14 +20,12 @@ const Order = () => {
       longitudeTo: "",
     },
   });
-  console.log("🚀 ~ file: Order.jsx ~ line 14 ~ Order ~ errors", errors);
   const onSubmit = async (data) => {
     try {
       await driverApi.createDriver(data);
       reset();
       alert("Create order successfully");
     } catch (err) {
-      console.log("🚀 ~ file: Order.jsx ~ line 22 ~ onSubmit ~ err", err);
       alert("Create order failed");
     }
   };

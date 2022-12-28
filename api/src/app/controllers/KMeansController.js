@@ -17,7 +17,6 @@ const groupOrders = (req, res) => {
 };
 const assignDrivers = (req, res) => {
   const { orders, drivers } = req.value.body;
-  console.log("🚀 ~ file: KMeansController.js ~ line 20 ~ assignDrivers ~ orders", orders)
 
   if (orders.length == 0 || drivers.length == 0)
     return res.status(400).json({ message: "Error" });
